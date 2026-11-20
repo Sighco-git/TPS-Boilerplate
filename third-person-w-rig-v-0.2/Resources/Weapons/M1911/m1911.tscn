@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b4aramvmokqu4"]
+
+[ext_resource type="PackedScene" uid="uid://etelvdgfh73r" path="res://Systems/Weapons/raycast_weapon_muzzle.tscn" id="1_3qgod"]
+
+[node name="M1911" type="Node3D" unique_id=1317768901]
+
+[node name="RaycastWeaponMuzzle" parent="." unique_id=150030651 instance=ExtResource("1_3qgod")]

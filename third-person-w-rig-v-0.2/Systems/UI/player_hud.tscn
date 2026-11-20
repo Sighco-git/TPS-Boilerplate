@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://sv78lcgj8uno"]
+
+[ext_resource type="Script" uid="uid://cb7ko5ltdchow" path="res://Systems/UI/player_hud.gd" id="1_tvw2b"]
+
+[node name="PlayerHUD" type="Control" unique_id=572365633]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("1_tvw2b")
+
+[node name="AmmoCount" type="Label" parent="." unique_id=730348084]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -65.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Ammo:"

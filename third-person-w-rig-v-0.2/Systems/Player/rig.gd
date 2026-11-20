@@ -1,0 +1,32 @@
+extends Node3D
+
+@export var animation_speed := 7.5
+
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
+
+var run_path: String = "parameters/MoveSpace/blend_position"
+var run_weight_target := -1.0
+
+
+func _physics_process(delta: float) -> void:
+	# Smooth the animation start and stop using "move_toward()"
+	animation_tree[run_path] = move_toward(
+		animation_tree[run_path],
+		run_weight_target,
+		delta * animation_speed
+	)
+# Pass a parameter called "direction".
+# When refered to in the Player.gd script, 
+# direction parameter will be passed from the Player's own version of the variable.
+func update_animation_tree(direction: Vector3) -> void:
+	if direction.is_zero_approx(): # "0" being not moving
+		run_weight_target = -1.0 # "-1" Idle-sided blend
+	else:
+		run_weight_target = 1.0 # "1" Run-sided blend
+		
+func travel(animation_name: String) -> void:
+	playback.travel(animation_name)
+	
+func is_idle() -> bool:
+	return playback.get_current_node() == "MoveSpace"

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://etelvdgfh73r"]
+
+[ext_resource type="Texture2D" uid="uid://umacxwv5movk" path="res://Visuals/Weapons/DynamicReticle.tres" id="2_8jbph"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_wx6xx"]
+
+[node name="RaycastWeaponMuzzle" type="Marker3D" unique_id=150030651]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="ReticleMover" type="SpringArm3D" parent="." unique_id=1757388776]
+shape = SubResource("SeparationRayShape3D_wx6xx")
+spring_length = 50.0
+
+[node name="DynamicReticle" type="Sprite3D" parent="ReticleMover" unique_id=1005839339]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 4.9339153e-17, 0, 3.1044083e-09)
+layers = 8
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.5
+texture = ExtResource("2_8jbph")
+
+[node name="BulletRaycast" type="RayCast3D" parent="." unique_id=596664045 groups=["enemy"]]
+unique_name_in_owner = true
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 2.8463276e-10, 0, -0.006511628)
+target_position = Vector3(0, 0, 1000)
+collide_with_areas = true

@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://b2src2kpqsoap"]
+
+[ext_resource type="Script" uid="uid://vyilyrkjhw2w" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://bcbo3fur08h0l" path="res://Player/smooth_camera_arm.gd" id="2_4ntmi"]
+[ext_resource type="PackedScene" uid="uid://cocacroeut42u" path="res://Player/rig.tscn" id="3_btcbx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
+radius = 0.35302734
+height = 1.7905234
+
+[sub_resource type="GDScript" id="GDScript_btcbx"]
+script/source = "extends Node3D
+
+@onready var right_hand: BoneAttachment3D = $RigPivot/Rig/Skeleton/RightHand
+const GUN = preload(\"uid://b70yr478t2hi3\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var gun = GUN.instantiate()
+	right_hand.add_child(gun)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_l8h54"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1969353485]
+script = ExtResource("1_l8h54")
+mouse_sensitivity = 0.006
+min_boundary = -80.0
+max_boundary = 30.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1283726593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8952617, 0)
+shape = SubResource("CapsuleShape3D_hvfyp")
+
+[node name="HorizontalPivot" type="Node3D" parent="." unique_id=1068033941]
+
+[node name="VerticalPivot" type="Node3D" parent="HorizontalPivot" unique_id=680294461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0051763, 0, 0)
+
+[node name="RigPivot" type="Node3D" parent="." unique_id=531051998]
+
+[node name="Rig" parent="RigPivot" unique_id=1273243973 instance=ExtResource("3_btcbx")]
+
+[node name="WeaponManager" type="Node3D" parent="RigPivot/Rig" unique_id=1773593665]
+script = SubResource("GDScript_btcbx")
+
+[node name="SmoothCameraArm" type="SpringArm3D" parent="." unique_id=1222179539 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.017118, 0)
+collision_mask = 2
+shape = SubResource("SeparationRayShape3D_l8h54")
+spring_length = 2.0
+script = ExtResource("2_4ntmi")
+target = NodePath("../HorizontalPivot/VerticalPivot")
+camera_y_offset = 0.325
+
+[node name="Camera3D" type="Camera3D" parent="SmoothCameraArm" unique_id=834130779]
+transform = Transform3D(1, 0, 0, 0, 0.98480797, -0.1736482, 0, 0.17364822, 0.98480785, 0, 0, 0)

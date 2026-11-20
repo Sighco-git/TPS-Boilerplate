@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://delsinwg627lh"]
+
+[ext_resource type="Script" uid="uid://caajb3jwlpw5s" path="res://Systems/Weapons/WeaponData.gd" id="1_xvb6f"]
+[ext_resource type="PackedScene" uid="uid://b4aramvmokqu4" path="res://Resources/Weapons/M1911/m1911.tscn" id="2_8x6t7"]
+
+[resource]
+script = ExtResource("1_xvb6f")
+weapon_name = "M1911"
+damage = 10.0
+fire_rate = 10.0
+mag_size = 7
+weapon_scene = ExtResource("2_8x6t7")
+metadata/_custom_type_script = "uid://caajb3jwlpw5s"
