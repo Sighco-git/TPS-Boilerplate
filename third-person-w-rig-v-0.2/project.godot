@@ -14,6 +14,10 @@ config/name="ThirdPersonWRigV0.2"
 run/main_scene="uid://bxjcrmnefc28e"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global_group]
 
 enemy=""
