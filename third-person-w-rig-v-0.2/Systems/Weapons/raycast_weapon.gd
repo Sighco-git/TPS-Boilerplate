@@ -4,16 +4,21 @@ class_name RaycastWeapon
 @export var equiped_weapon = WeaponData
 @onready var max_ammo = equiped_weapon.mag_size
 @onready var current_ammo = max_ammo
-var bullet_raycast # to stop errors
+var weapon_muzzle: Marker3D
+var bullet_raycast: RayCast3D
 
 func _ready() -> void:
-	current_ammo = max_ammo
+	equip_weapon()
 
-# Reloading
+func equip_weapon():
+	equiped_weapon = equiped_weapon.weapon_scene.instantiate()
+	add_child(equiped_weapon)
+	weapon_muzzle = equiped_weapon.get_node("RaycastWeaponMuzzle")
+	bullet_raycast = weapon_muzzle.get_node("BulletRaycast")
+	
 func reload():
 	current_ammo = max_ammo
 
-# Shooting
 func shoot():
 	if current_ammo > 0:
 		get_col_points()
